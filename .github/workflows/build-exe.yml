@@ -47,10 +47,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pyinstaller-dist-
 
+
       - name: Build EXE
         run: |
           echo "开始打包 ${{ env.MAIN_SCRIPT }}"
-          pyinstaller --noconsole --onefile ${{ env.MAIN_SCRIPT }}
+          pyinstaller --clean --onefile --paths "." --collect-submodules "exporter" "${{ env.MAIN_SCRIPT }}"
 
       - name: Show output files
         run: dir dist
